@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administrador - EXY</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <!-- Login Modal CORREGIDO -->
+    <div id="adminLoginModal" class="admin-login-modal">
+        <div class="admin-login-container">
+            <!-- Improved centered login box with better visual hierarchy -->
+            <div class="admin-login-box">
+                <!-- Header con icono y título -->
+                <div class="admin-login-header">
+                    <div class="admin-login-icon">
+                        <i class="fas fa-cube"></i>
+                    </div>
+                    <h1>EXY Admin</h1>
+                    <p class="admin-login-subtitle">Panel de Control</p>
+                </div>
+
+                <!-- Formulario de login -->
+                <form id="adminLoginForm" class="admin-login-form">
+                    <div class="form-group">
+                        <label for="adminUsername">
+                            <i class="fas fa-user"></i>
+                            Usuario
+                        </label>
+                        <input type="text" id="adminUsername" name="username" placeholder="admin" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminPassword">
+                            <i class="fas fa-lock"></i>
+                            Contraseña
+                        </label>
+                        <input type="password" id="adminPassword" name="password" placeholder="••••••••" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-login">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Iniciar Sesión
+                    </button>
+                </form>
+
+                <!-- Divisor y credenciales de demo -->
+                <div class="admin-login-divider">
+                    <span>Credenciales de Demo</span>
+                </div>
+
+                <div class="admin-login-credentials">
+                    <div class="credential-item">
+                        <span class="credential-label">Usuario:</span>
+                        <code class="credential-code">admin</code>
+                    </div>
+                    <div class="credential-item">
+                        <span class="credential-label">Contraseña:</span>
+                        <code class="credential-code">admin123</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Content (Hidden until login) -->
+    <div id="adminContent" style="display: none;">
+        <!-- Header del Admin -->
+        <header class="admin-header">
+            <div class="header-content">
+                <div class="admin-logo">
+                    <i class="fas fa-cube"></i>
+                    <span>EXY Marketplace</span>
+                </div>
+                <div class="admin-header-right">
+                    <div class="user-info">
+                        <span id="adminUsername">Admin</span>
+                        <button class="theme-toggle" id="themeToggle" title="Cambiar tema"><i class="fas fa-moon"></i></button>
+                    </div>
+                    <button id="adminLogoutBtn" class="btn btn-logout">
+                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Container: Sidebar + Content -->
+        <div class="admin-wrapper">
+            <!-- Sidebar -->
+            <aside class="admin-sidebar">
+                <nav class="admin-menu">
+                    <button class="admin-menu-item active" data-section="dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </button>
+                    <button class="admin-menu-item" data-section="add-artwork">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Nueva Obra</span>
+                    </button>
+                    <button class="admin-menu-item" data-section="manage-artworks">
+                        <i class="fas fa-images"></i>
+                        <span>Mis Obras</span>
+                    </button>
+                    <button class="admin-menu-item" data-section="users">
+                        <i class="fas fa-users"></i>
+                        <span>Usuarios</span>
+                    </button>
+                    <button class="admin-menu-item" data-section="orders">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Órdenes</span>
+                    </button>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="admin-main">
+                <!-- Dashboard Section -->
+                <section id="dashboard" class="admin-section active">
+                    <div class="admin-section-header">
+                        <h1><i class="fas fa-chart-line"></i> Dashboard</h1>
+                        <p>Bienvenido al panel de control</p>
+                    </div>
+
+                    <!-- Stats Grid -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-images"></i></div>
+                            <div class="stat-info">
+                                <h3 id="statArtworks">0</h3>
+                                <p>Obras Totales</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-users"></i></div>
+                            <div class="stat-info">
+                                <h3 id="statUsers">0</h3>
+                                <p>Usuarios</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-shopping-cart"></i></div>
+                            <div class="stat-info">
+                                <h3 id="statOrders">0</h3>
+                                <p>Órdenes</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
+                            <div class="stat-info">
+                                <h3 id="statRevenue">$0</h3>
+                                <p>Ventas Totales</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="recent-activity">
+                        <h2>Actividad Reciente</h2>
+                        <div id="activityList" class="activity-list">
+                            <div class="activity-item">
+                                <i class="fas fa-info-circle"></i>
+                                <span>Panel de administrador cargado</span>
+                                <small>Ahora</small>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Add Artwork Section -->
+                <section id="add-artwork" class="admin-section">
+                    <div class="admin-section-header">
+                        <h1><i class="fas fa-plus-circle"></i> Nueva Obra</h1>
+                        <p>Publica una nueva obra en el marketplace</p>
+                    </div>
+
+                    <form id="adminArtworkForm" class="admin-form">
+                        <!-- Información Básica -->
+                        <div class="form-section">
+                            <h3 class="form-section-title">Información Básica</h3>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Título de la Obra <span class="required">*</span></label>
+                                <input type="text" id="artworkTitle" name="title" class="form-input" placeholder="Ej: Cosmic Dreams" required>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Artista <span class="required">*</span></label>
+                                    <input type="text" id="artworkArtist" name="artist" class="form-input" placeholder="Tu nombre" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Precio ($) <span class="required">*</span></label>
+                                    <input type="number" id="artworkPrice" name="price" class="form-input" placeholder="0.00" min="0" step="0.01" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Categoría <span class="required">*</span></label>
+                                    <select id="artworkCategory" name="category" class="form-input" required>
+                                        <option value="">Selecciona una categoría</option>
+                                        <option value="digital-art">Arte Digital</option>
+                                        <option value="illustration">Ilustración</option>
+                                        <option value="photography">Fotografía</option>
+                                        <option value="web-design">Diseño Web</option>
+                                        <option value="software">Software</option>
+                                        <option value="graphic-design">Diseño Gráfico</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Estado</label>
+                                    <select id="artworkStatus" name="status" class="form-input">
+                                        <option value="active">Activo</option>
+                                        <option value="inactive">Inactivo</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Descripción -->
+                        <div class="form-section">
+                            <h3 class="form-section-title">Descripción</h3>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Descripción <span class="required">*</span></label>
+                                <textarea id="artworkDescription" name="description" class="form-input" rows="5" placeholder="Describe tu obra en detalle..." required></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Tags</label>
+                                <input type="text" id="artworkTags" name="tags" class="form-input" placeholder="tag1, tag2, tag3">
+                            </div>
+                        </div>
+
+                        <!-- Archivos -->
+                        <div class="form-section">
+                            <h3 class="form-section-title">Archivos</h3>
+
+                            <!-- Imagen de Vista Previa -->
+                            <div class="form-group">
+                                <label class="form-label">Imagen de Vista Previa <span class="required">*</span></label>
+                                <div class="upload-area" id="previewUploadArea">
+                                    <div class="upload-content">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        <h4>Arrastra la imagen aquí</h4>
+                                        <p>o haz clic para seleccionar</p>
+                                        <small>PNG, JPG, JPEG, WebP • Máximo 5MB</small>
+                                    </div>
+                                    <input type="file" id="previewFileInput" accept="image/*" hidden>
+                                </div>
+                                <div id="previewFilePreview" class="file-preview"></div>
+                            </div>
+
+                            <!-- Archivos Principales -->
+                            <div class="form-group">
+                                <label class="form-label">Archivos Principales</label>
+                                <div class="upload-area" id="mainUploadArea">
+                                    <div class="upload-content">
+                                        <i class="fas fa-file-archive"></i>
+                                        <h4>Arrastra los archivos aquí</h4>
+                                        <p>o haz clic para seleccionar</p>
+                                        <small>ZIP, RAR, PSD, AI, SKETCH, FIG, XD • Máximo 100MB</small>
+                                    </div>
+                                    <input type="file" id="mainFileInput" multiple hidden>
+                                </div>
+                                <div id="mainFilePreview" class="file-preview"></div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-plus"></i> Publicar Obra
+                            </button>
+                            <button type="reset" class="btn btn-secondary btn-lg">
+                                <i class="fas fa-redo"></i> Limpiar
+                            </button>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Manage Artworks Section -->
+                <section id="manage-artworks" class="admin-section">
+                    <div class="admin-section-header">
+                        <h1><i class="fas fa-images"></i> Mis Obras</h1>
+                        <p>Gestiona tus obras publicadas</p>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Título</th>
+                                    <th>Categoría</th>
+                                    <th>Precio</th>
+                                    <th>Estado</th>
+                                    <th>Fecha</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="artworksTableBody">
+                                <tr>
+                                    <td colspan="7" style="text-align: center; color: #999; padding: 40px;">No hay obras publicadas aún</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Users Section -->
+                <section id="users" class="admin-section">
+                    <div class="admin-section-header">
+                        <h1><i class="fas fa-users"></i> Usuarios</h1>
+                        <p>Gestiona los usuarios registrados en el marketplace</p>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Email</th>
+                                    <th>Nombre</th>
+                                    <th>Registro</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody">
+                                <tr>
+                                    <td colspan="5" style="text-align: center; color: #999; padding: 40px;">No hay usuarios registrados aún</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Orders Section -->
+                <section id="orders" class="admin-section">
+                    <div class="admin-section-header">
+                        <h1><i class="fas fa-shopping-cart"></i> Órdenes</h1>
+                        <p>Gestiona las órdenes de los clientes</p>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>ID Orden</th>
+                                    <th>Cliente</th>
+                                    <th>Total</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ordersTableBody">
+                                <tr>
+                                    <td colspan="5" style="text-align: center; color: #999; padding: 40px;">No hay órdenes aún</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="/js/admin.js"></script>
+</body>
+</html>
+

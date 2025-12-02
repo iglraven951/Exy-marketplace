@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EXY - El mercado ideal para estudiantes, artistas, diseñadores y desarrolladores">
+    <meta name="keywords" content="marketplace, arte digital, diseño, desarrollo, importación, dropshipping">
+    <title>EXY | principal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/ia-glob.css">
+    <link rel="icon" type="icono.png" sizes="16x16" href="/icono.png">
+</head>
+<body>
+    <!-- Header con menú de navegación fijo -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a class="logo" href="/template/index.html">
+                    <img src="/icono.png" alt="Logo de EXY" class="logo-icon">EXY
+                </a>
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="nav-links">
+                    <a href="/template/index.html" class="nav-link">Explorar</a>
+                    <a href="/template/obras.html" class="nav-link">Categorías</a>
+                    <button id="themeToggle" class="theme-toggle" aria-label="Cambiar tema">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <div class="notification-toggle" id="notificationToggle">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="notificationBadge">2</span>
+                    </div>
+                    <a href="#" class="nav-link cart-icon" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    <a href="#" class="btn btn-primary" id="authButton" onclick="showAuthModal()">Iniciar Sesión</a>
+                    <div id="userMenu" style="display: none; align-items: center; gap: 10px;">
+                        <span id="userName" style="color: white;"></span>
+                        <button id="logoutBtn" class="btn btn-secondary">Cerrar Sesión</button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Centro de notificaciones -->
+    <div class="notification-center" id="notificationCenter">
+        <div class="notification-header">
+            <h3>Notificaciones</h3>
+            <button class="btn-link" onclick="markAllNotificationsAsRead()">Marcar todas como leídas</button>
+        </div>
+        <ul class="notification-list">
+            <li class="notification-item unread">
+                <div class="notification-title">¡Bienvenido a Globex!</div>
+                <div class="notification-message">Explora nuestra colección de obras digitales.</div>
+                <div class="notification-time">Ahora</div>
+            </li>
+            <li class="notification-item unread">
+                <div class="notification-title">Nuevas obras disponibles</div>
+                <div class="notification-message">Se han añadido 6 nuevas obras a nuestra galería.</div>
+                <div class="notification-time">Hace 2 horas</div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Sección hero mejorada con efectos visuales -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-text">
+                <h1>Muestra tu Talento Creativo</h1>
+                <p>🚀 La plataforma líder para creativos</p>
+                <p>El mercado ideal para que estudiantes, artistas, diseñadores</p>
+                <p>y desarrolladores exhiban y vendan sus increíbles trabajos.</p>
+                <div class="cta-buttons">
+                    <a href="/template/obras.html" class="btn btn-primary">
+                        <i class="fas fa-rocket" style="margin-right: 8px;"></i>
+                        Explorar Galería
+                    </a>
+                    <a href="#contacto" class="btn btn-secondary">
+                        <i class="fas fa-envelope" style="margin-right: 8px;"></i>
+                        Contáctanos
+                    </a>
+                </div>
+            </div>
+            <div class="hero-video">
+                <iframe 
+                    width="560" 
+                    height="315" 
+                    src="https://www.youtube.com/embed/ScMzIvxBSi4" 
+                    title="Video promocional de Globex"
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen
+                    style="border-radius: 20px;">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de características mejorada -->
+    <section class="feature-section">
+        <div class="container">
+            <div class="feature-container">
+                <div class="feature">
+                    <h2><i class="fas fa-shipping-fast" style="margin-right: 15px; font-size: 2rem;"></i>Para Importadores</h2>
+                    <p>Obtén las mejores ofertas de importación al instante. Optimiza costos, minimiza riesgos y reduce procesos con facilidad.</p>
+                    <ul>
+                        <li><i class="fas fa-chart-line"></i> Optimiza costos de importación</li>
+                        <li><i class="fas fa-shield-alt"></i> Minimiza riesgos operativos</li>
+                        <li><i class="fas fa-tasks"></i> Reduce procesos burocráticos</li>
+                        <li><i class="fas fa-clock"></i> Ahorra tiempo valioso</li>
+                        <li><i class="fas fa-handshake"></i> Conecta con proveedores confiables</li>
+                    </ul>
+                </div>
+                <div class="feature">
+                    <h2><i class="fas fa-store" style="margin-right: 15px; font-size: 2rem;"></i>Para Dropshippers</h2>
+                    <p>Únete a las importaciones de los líderes del mercado y maximiza tus ganancias.</p>
+                    <ul>
+                        <li><i class="fas fa-dollar-sign"></i> Poca inversión inicial</li>
+                        <li><i class="fas fa-play-circle"></i> Rápida ejecución de órdenes</li>
+                        <li><i class="fas fa-trophy"></i> Éxito garantizado</li>
+                        <li><i class="fas fa-users"></i> Comunidad de apoyo</li>
+                        <li><i class="fas fa-trending-up"></i> Crecimiento escalable</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de cotizaciones -->
+    <section class="quote-section">
+        <div class="container">
+            <div class="quote-container">
+                <div class="quote-text">
+                    <h2>Cotizaciones Múltiples</h2>
+                    <p>Optimiza tus costos, minimiza riesgos y trabaja con seguridad.</p>
+                    <button class="btn-quote">Cotiza AHORA</button>
+                </div>
+                <div class="quote-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Agencias</th>
+                                <th>Servicios en origen</th>
+                                <th>Servicios de destino</th>
+                                <th>Impuestos</th>
+                                <th>Total USD</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Klogistic.pe</td>
+                                <td>750.00</td>
+                                <td>523.92</td>
+                                <td>Ad Valorem: 22.50<br>IGV: 123.60<br>Percepción: 31.90</td>
+                                <td>$1,467.37</td>
+                            </tr>
+                            <tr>
+                                <td>Newports</td>
+                                <td>720.00</td>
+                                <td>587.64</td>
+                                <td>Ad Valorem: 21.60<br>IGV: 118.66<br>Percepción: 30.63</td>
+                                <td>$1,493.36</td>
+                            </tr>
+                            <tr>
+                                <td>GrupoAduan</td>
+                                <td>690.00</td>
+                                <td>438.96</td>
+                                <td>Ad Valorem: 20.70<br>IGV: 113.71<br>Percepción: 29.35</td>
+                                <td>$1,306.93</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de precios -->
+    <section class="pricing-section">
+        <div class="container">
+            <div class="pricing-container">
+                <div class="pricing-header">
+                    <h2>Elige el plan correcto para ti</h2>
+                    <div class="currency-toggle">
+                        <span>USD</span>
+                        <label class="switch">
+                            <input type="checkbox" id="currencyToggle">
+                            <span class="slider"></span>
+                        </label>
+                        <span>PEN</span>
+                    </div>
+                    <p class="savings">Planes premium próximamente disponibles</p>
+                </div>
+                <div class="pricing-plans">
+                    <!-- Plan Básico - Disponible -->
+                    <div class="plan basic" id="basicPlan">
+                        <h3>Básico</h3>
+                        <p class="price">0 USD</p>
+                        <div class="available-tag">Disponible Ahora</div>
+                        <ul>
+                            <li>✔ Cotiza con múltiples agencias en simultáneo (1 vez)</li>
+                            <li>✔ Elige agencias de aduana con IA</li>
+                            <li>✘ Tabla comparativa de precios</li>
+                            <li>✘ Curso para importar con Inteligencia Artificial</li>
+                            <li>✘ Certificación</li>
+                            <li>✘ Asistente IA Glob</li>
+                        </ul>
+                        <button class="btn-start" id="basicPlanBtn" onclick="selectPlan('basic', 0)">Empezar ahora</button>
+                    </div>
+
+                    <!-- Plan Pro - Ahora disponible -->
+                    <div class="plan pro" id="proPlan">
+                        <h3>Pro</h3>
+                        <p class="price">29 USD / Mensual</p>
+                        <div class="available-tag">Disponible Ahora</div>
+                        <ul>
+                            <li>✔ Cotiza con múltiples agencias en simultáneo (ilimitado)</li>
+                            <li>✔ Elige agencias de aduana con IA</li>
+                            <li>✔ Tabla comparativa de precios</li>
+                            <li>✔ Curso para importar con Inteligencia Artificial</li>
+                            <li>✔ Certificación</li>
+                            <li>✔ Asistente IA Glob Premium 🤖👑</li>
+                        </ul>
+                        <button class="btn-start" id="proPlanBtn" onclick="selectPlan('pro', 29)">
+                            <i class="fas fa-crown"></i> Suscribirse
+                        </button>
+                    </div>
+
+                    <!-- Plan Pro Anual - Ahora disponible -->
+                    <div class="plan pro-annual" id="proAnnualPlan">
+                        <h3>Pro (45% descuento)</h3>
+                        <p class="price">190 USD / Anual</p>
+                        <div class="available-tag">Disponible Ahora</div>
+                        <ul>
+                            <li>✔ Cotiza con múltiples agencias en simultáneo (ilimitado)</li>
+                            <li>✔ Elige agencias de aduana con IA</li>
+                            <li>✔ Tabla comparativa de precios</li>
+                            <li>✔ Curso para importar con Inteligencia Artificial</li>
+                            <li>✔ Certificación</li>
+                            <li>✔ Asistente IA Glob Premium 🤖👑</li>
+                        </ul>
+                        <button class="btn-start" id="proAnnualPlanBtn" onclick="selectPlan('pro-annual', 190)">
+                            <i class="fas fa-crown"></i> Suscribirse Anual
+                        </button>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 30px;">
+                    <p style="color: #26c6da; font-size: 1.1rem; margin-bottom: 15px;">
+                        <i class="fas fa-check-circle"></i> Todos los planes están disponibles ahora
+                    </p>
+                    <p style="color: #ccc; font-size: 0.9rem;">
+                        Los planes premium incluyen acceso completo al asistente IA Glob 🤖👑
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nueva sección de contacto -->
+    <section class="contact-section" id="contacto">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Contáctanos</h2>
+                    <p>¿Tienes alguna pregunta o sugerencia? Estamos aquí para ayudarte. Completa el formulario y nos pondremos en contacto contigo lo antes posible.</p>
+                    <div style="margin-top: 30px;">
+                        <p><i class="fas fa-envelope" style="margin-right: 10px; color: #26c6da;"></i> 74156177@certus.edu.pe</p>
+                        <p><i class="fas fa-phone" style="margin-right: 10px; color: #26c6da;"></i> +51 901439913</p>
+                        <p><i class="fas fa-map-marker-alt" style="margin-right: 10px; color: #26c6da;"></i> Av. los Incas Lote 1, Arequipa 04002</p>
+                    </div>
+                    <div style="margin-top: 30px;">
+                        <h3>Síguenos</h3>
+                        <div style="display: flex; gap: 15px; margin-top: 10px;">
+                            <a href="#" style="color: white; font-size: 24px;"><i class="fab fa-facebook"></i></a>
+                            <a href="#" style="color: white; font-size: 24px;"><i class="fab fa-twitter"></i></a>
+                            <a href="#" style="color: white; font-size: 24px;"><i class="fab fa-instagram"></i></a>
+                            <a href="#" style="color: white; font-size: 24px;"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h2>Envíanos un mensaje</h2>
+                    <form id="contactForm">
+                        <input type="hidden" id="contactCsrfToken" name="csrf_token" class="csrf-token">
+                        <div class="form-group">
+                            <label for="contactName" class="form-label">Nombre</label>
+                            <input type="text" id="contactName" name="name" class="form-input" required>
+                            <div id="contactNameError" class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail" class="form-label">Email</label>
+                            <input type="email" id="contactEmail" name="email" class="form-input" required>
+                            <div id="contactEmailError" class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactSubject" class="form-label">Asunto</label>
+                            <input type="text" id="contactSubject" name="subject" class="form-input" required>
+                            <div id="contactSubjectError" class="error-message"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage" class="form-label">Mensaje</label>
+                            <textarea id="contactMessage" name="message" class="form-input form-textarea" required></textarea>
+                            <div id="contactMessageError" class="error-message"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar Mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de autenticación -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-container">
+            <button class="close-btn close-auth">&times;</button>
+            <div class="auth-header">
+                <div class="auth-tab active" data-form="loginForm">Iniciar Sesión</div>
+                <div class="auth-tab" data-form="registerForm">Registrarse</div>
+            </div>
+            
+            <!-- Formulario de inicio de sesión -->
+            <form id="loginForm" class="auth-form active">
+                <input type="hidden" id="loginCsrfToken" name="csrf_token" class="csrf-token">
+                <div class="form-group">
+                    <label for="loginEmail" class="form-label">Email</label>
+                    <input type="email" id="loginEmail" name="email" class="form-input" required>
+                    <div id="loginEmailError" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword" class="form-label">Contraseña</label>
+                    <input type="password" id="loginPassword" name="password" class="form-input" required>
+                    <div id="loginPasswordError" class="error-message"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <label style="display: flex; align-items: center;">
+                        <input type="checkbox" style="margin-right: 5px;"> Recordarme
+                    </label>
+                    <a href="#" style="color: #26c6da; text-decoration: none; font-size: 0.9rem;">¿Olvidaste tu contraseña?</a>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Iniciar Sesión</button>
+                
+                <div class="divider">
+                    <span>O</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" id="googleLoginBtn" class="social-btn google-btn">
+                        <i class="fab fa-google" style="margin-right: 10px;"></i> Continuar con Google
+                    </button>
+                    <button type="button" id="facebookLoginBtn" class="social-btn facebook-btn">
+                        <i class="fab fa-facebook-f" style="margin-right: 10px;"></i> Continuar con Facebook
+                    </button>
+                </div>
+            </form>
+            
+            <!-- Formulario de registro -->
+            <form id="registerForm" class="auth-form">
+                <input type="hidden" id="registerCsrfToken" name="csrf_token" class="csrf-token">
+                <div class="form-group">
+                    <label for="registerName" class="form-label">Nombre</label>
+                    <input type="text" id="registerName" name="name" class="form-input" required>
+                    <div id="registerNameError" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail" class="form-label">Email</label>
+                    <input type="email" id="registerEmail" name="email" class="form-input" required>
+                    <div id="registerEmailError" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword" class="form-label">Contraseña</label>
+                    <input type="password" id="registerPassword" name="password" class="form-input" required>
+                    <div id="registerPasswordError" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword" class="form-label">Confirmar Contraseña</label>
+                    <input type="password" id="registerConfirmPassword" name="confirmPassword" class="form-input" required>
+                    <div id="registerConfirmPasswordError" class="error-message"></div>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: flex; align-items: center;">
+                        <input type="checkbox" style="margin-right: 5px;" required> Acepto los <a href="#" style="color: #26c6da; margin-left: 5px;">términos y condiciones</a>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Crear Cuenta</button>
+                
+                <div class="divider">
+                    <span>O</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" id="googleRegisterBtn" class="social-btn google-btn">
+                        <i class="fab fa-google" style="margin-right: 10px;"></i> Registrarse con Google
+                    </button>
+                    <button type="button" id="facebookRegisterBtn" class="social-btn facebook-btn">
+                        <i class="fab fa-facebook-f" style="margin-right: 10px;"></i> Registrarse con Facebook
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal del Carrito -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeCart()">&times;</button>
+            <h2 style="margin-bottom: 1.5rem;">Carrito de Compras</h2>
+            <div id="cartContent">
+                <!-- Contenido del carrito será añadido por JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Método de Pago -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closePaymentModal()">&times;</button>
+            <h2 style="margin-bottom: 1rem;">Selecciona un método de pago</h2>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <button class="btn btn-primary" onclick="payWithCard()">💳 Pagar con Tarjeta</button>
+                <button class="btn btn-secondary" onclick="payWithPayPal()">🅿️ Pagar con PayPal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Icon -->
+    <a href="https://wa.me/901439913" target="_blank" class="whatsapp-icon" aria-label="Contactar por WhatsApp">
+        <img src="/iconos-de-whatsapp-en-fondo-transparente-removebg-preview.png" alt="WhatsApp" />
+    </a>
+
+    <!-- Scripts en el orden correcto -->
+    <script src="/js/auth.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/ia-glob.js"></script>
+    <script>
+        // Inicializar tokens CSRF
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Inicializando página index.html...');
+        
+            // Establecer tokens CSRF en los formularios
+            document.querySelectorAll('.csrf-token').forEach(input => {
+                if (typeof CSRF_TOKEN !== 'undefined') {
+                    input.value = CSRF_TOKEN;
+                }
+            });
+        
+            // Forzar actualización de navegación después de cargar
+            setTimeout(() => {
+                console.log('🔄 Actualizando navegación...');
+                if (typeof updateNavigation === 'function') {
+                    updateNavigation();
+                }
+                if (typeof updatePricingPlans === 'function') {
+                    updatePricingPlans();
+                }
+            }, 500);
+        
+            // Verificar si hay usuario logueado
+            const currentUser = localStorage.getItem('marketplace_current_user');
+            if (currentUser) {
+                console.log('👤 Usuario encontrado, actualizando interfaz...');
+                setTimeout(() => {
+                    if (typeof updateNavigation === 'function') {
+                        updateNavigation();
+                    }
+                }, 1000);
+            }
+        });
+    </script>
+    <script src="/js/api-client.js"></script>
+</body>
+</html>
+
+
+

@@ -1,0 +1,186 @@
+{
+  "info": {
+    "name": "ProyectoMarketplace API",
+    "description": "Colección de APIs para gestionar obras y pagos",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "OBRAS",
+      "item": [
+        {
+          "name": "GET - Obtener todas las obras",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/artworks",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "artworks"]
+            }
+          }
+        },
+        {
+          "name": "POST - Crear nueva obra",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"La Persistencia de la Memoria\",\n  \"description\": \"Obra maestra del surrealismo\",\n  \"price\": 5000,\n  \"artist\": \"Salvador Dalí\",\n  \"category\": \"surrealismo\",\n  \"image\": \"https://ejemplo.com/imagen.jpg\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/artworks",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "artworks"]
+            }
+          }
+        },
+        {
+          "name": "PUT - Actualizar obra",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"La Persistencia de la Memoria - Edición Especial\",\n  \"price\": 6000\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/artworks/1234567890",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "artworks", "1234567890"]
+            }
+          }
+        },
+        {
+          "name": "DELETE - Eliminar obra",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/artworks/1234567890",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "artworks", "1234567890"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "PAGOS",
+      "item": [
+        {
+          "name": "GET - Obtener todos los pagos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/payments",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "payments"]
+            }
+          }
+        },
+        {
+          "name": "POST - Registrar nuevo pago",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"artworkId\": 1234567890,\n  \"buyerName\": \"Juan García\",\n  \"buyerEmail\": \"juan@ejemplo.com\",\n  \"amount\": 5000,\n  \"paymentMethod\": \"tarjeta_credito\",\n  \"transactionId\": \"TXN-2024-001\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/payments",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "payments"]
+            }
+          }
+        },
+        {
+          "name": "GET - Obtener pagos por obra",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/payments/artwork/1234567890",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "payments", "artwork", "1234567890"]
+            }
+          }
+        },
+        {
+          "name": "PUT - Actualizar estado de pago",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"completed\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/payments/1234567890",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "payments", "1234567890"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "HEALTH",
+      "item": [
+        {
+          "name": "GET - Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/health",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["api", "health"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

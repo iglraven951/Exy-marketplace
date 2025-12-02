@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Globex - Explora nuestra galería de obras digitales, ilustraciones, fotografías y más">
+    <meta name="keywords" content="marketplace, galería, arte digital, diseño, desarrollo, obras">
+    <title>EXY | obras</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/obras.css">
+    <link rel="stylesheet" href="/css/ia-glob.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icono.png">
+</head>
+<body>
+    <!-- Header con menú de navegación fijo -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a class="logo" href="/template/index.html">
+                    <img src="/icono.png" alt="Logo de Globex" class="logo-icon">EXY
+                </a>
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="nav-links">
+                    <a href="/template/index.html" class="nav-link">Explorar</a>
+                    <a href="/template/obras.html" class="nav-link">Categorías</a>
+                    <button id="themeToggle" class="theme-toggle" aria-label="Cambiar tema">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                    <div class="notification-toggle" id="notificationToggle">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="notificationBadge">2</span>
+                    </div>
+                    <a href="#" class="nav-link cart-icon" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                    <a href="#" class="btn btn-primary" id="authButton" onclick="showAuthModal()">Iniciar Sesión</a>
+                    <div id="userMenu" style="display: none; align-items: center; gap: 10px;">
+                        <span id="userName" style="color: white;"></span>
+                        <button id="logoutBtn" class="btn btn-secondary">Cerrar Sesión</button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Centro de notificaciones -->
+    <div class="notification-center" id="notificationCenter">
+        <div class="notification-header">
+            <h3>Notificaciones</h3>
+            <button class="btn-link" onclick="markAllNotificationsAsRead()">Marcar todas como leídas</button>
+        </div>
+        <ul class="notification-list">
+            <li class="notification-item unread">
+                <div class="notification-title">¡Bienvenido a Globex!</div>
+                <div class="notification-message">Explora nuestra colección de obras digitales.</div>
+                <div class="notification-time">Ahora</div>
+            </li>
+            <li class="notification-item unread">
+                <div class="notification-title">Nuevas obras disponibles</div>
+                <div class="notification-message">Se han añadido 6 nuevas obras a nuestra galería.</div>
+                <div class="notification-time">Hace 2 horas</div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Contenedor principal con nueva estructura -->
+    <div class="main-layout">
+        <!-- Barra lateral izquierda - Regiones/Categorías -->
+        <aside class="regions-sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-layer-group"></i> CATEGORÍAS</h3>
+            </div>
+            
+            <div class="region-list">
+                <div class="region-item active" data-category="all">
+                    <i class="fas fa-home"></i>
+                    <span>Todas</span>
+                    <span class="region-count">6</span>
+                </div>
+                <div class="region-item" data-category="digital-art">
+                    <i class="fas fa-paint-brush"></i>
+                    <span>Arte Digital</span>
+                    <span class="region-count">1</span>
+                </div>
+                <div class="region-item" data-category="illustration">
+                    <i class="fas fa-pencil-alt"></i>
+                    <span>Ilustración</span>
+                    <span class="region-count">1</span>
+                </div>
+                <div class="region-item" data-category="photography">
+                    <i class="fas fa-camera"></i>
+                    <span>Fotografía</span>
+                    <span class="region-count">1</span>
+                </div>
+                <div class="region-item" data-category="web-design">
+                    <i class="fas fa-code"></i>
+                    <span>Diseño Web</span>
+                    <span class="region-count">1</span>
+                </div>
+                <div class="region-item" data-category="software">
+                    <i class="fas fa-laptop-code"></i>
+                    <span>Software</span>
+                    <span class="region-count">1</span>
+                </div>
+                <div class="region-item" data-category="graphic-design">
+                    <i class="fas fa-palette"></i>
+                    <span>Diseño Gráfico</span>
+                    <span class="region-count">1</span>
+                </div>
+                <div class="region-item" data-category="3d-modeling">
+                    <i class="fas fa-cube"></i>
+                    <span>Modelado 3D</span>
+                    <span class="region-count">0</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <!-- Barra de búsqueda superior -->
+            <div class="search-header">
+                <div class="search-container">
+                    <div class="search-input-wrapper">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="Buscar obras, artistas..." id="searchInput">
+                    </div>
+                    <select class="sort-select" id="sortFilter">
+                        <option value="popularity">Popular</option>
+                        <option value="newest">Más Reciente</option>
+                        <option value="price-low">Precio ↑</option>
+                        <option value="price-high">Precio ↓</option>
+                        <option value="rating">Mejor Valoradas</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Grid de categorías principales -->
+            <div class="categories-section">
+                <div class="categories-grid">
+                    <div class="category-card featured active" data-category="all">
+                        <div class="category-icon">
+                            <i class="fas fa-th"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Todas</h3>
+                            <span id="count-all">0 obras</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card" data-category="digital-art">
+                        <div class="category-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Arte Digital</h3>
+                            <span id="count-digital-art">0 obras</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card" data-category="illustration">
+                        <div class="category-icon">
+                            <i class="fas fa-pencil-alt"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Ilustración</h3>
+                            <span id="count-illustration">0 obras</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card" data-category="photography">
+                        <div class="category-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Fotografía</h3>
+                            <span id="count-photography">0 obras</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card" data-category="web-design">
+                        <div class="category-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Diseño Web</h3>
+                            <span id="count-web-design">0 obras</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card" data-category="software">
+                        <div class="category-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <div class="category-info">
+                            <h3>Software</h3>
+                            <span id="count-software">0 obras</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de obras destacadas -->
+            <div class="featured-section">
+                <div class="section-header">
+                    <h2>Obras Destacadas</h2>
+                    <div class="section-controls">
+                        <div class="view-toggle">
+                            <button id="gridViewBtn" class="active" aria-label="Vista cuadrícula">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button id="listViewBtn" aria-label="Vista lista">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Galería de obras -->
+                <div class="gallery-container">
+                    <div class="gallery-grid" id="galleryGrid">
+                        <!-- Las obras serán añadidas por JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal de Detalle de Obra -->
+    <div class="modal" id="artworkModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div id="modalContent">
+                <!-- Contenido del modal será añadido por JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal del Carrito -->
+    <div class="modal" id="cartModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeCart()">&times;</button>
+            <h2 style="margin-bottom: 1.5rem;">Carrito de Compras</h2>
+            <div id="cartContent">
+                <!-- Contenido del carrito será añadido por JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Método de Pago Simple -->
+    <div class="modal" id="paymentModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closePaymentModal()">&times;</button>
+            <h2 style="margin-bottom: 1rem;">Selecciona un método de pago</h2>
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <button class="btn btn-primary" onclick="payWithCard()">💳 Pagar con Tarjeta</button>
+                <button class="btn btn-secondary" onclick="payWithPayPal()">🅿️ Pagar con PayPal</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de autenticación -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-container">
+            <button class="close-btn close-auth">&times;</button>
+            <div class="auth-header">
+                <div class="auth-tab active" data-form="loginForm">Iniciar Sesión</div>
+                <div class="auth-tab" data-form="registerForm">Registrarse</div>
+            </div>
+            
+            <!-- Formulario de inicio de sesión -->
+            <form id="loginForm" class="auth-form active">
+                <input type="hidden" id="loginCsrfToken" name="csrf_token" class="csrf-token">
+                <div class="form-group">
+                    <label for="loginEmail" class="form-label">Email</label>
+                    <input type="email" id="loginEmail" name="email" class="form-input" required>
+                    <div id="loginEmailError" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword" class="form-label">Contraseña</label>
+                    <input type="password" id="loginPassword" name="password" class="form-input" required>
+                    <div id="loginPasswordError" class="error-message"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <label style="display: flex; align-items: center;">
+                        <input type="checkbox" style="margin-right: 5px;"> Recordarme
+                    </label>
+                    <a href="#" style="color: #26c6da; text-decoration: none; font-size: 0.9rem;">¿Olvidaste tu contraseña?</a>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Iniciar Sesión</button>
+                
+                <div class="divider">
+                    <span>O</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" id="googleLoginBtn" class="social-btn google-btn">
+                        <i class="fab fa-google" style="margin-right: 10px;"></i> Continuar con Google
+                    </button>
+                    <button type="button" id="facebookLoginBtn" class="social-btn facebook-btn">
+                        <i class="fab fa-facebook-f" style="margin-right: 10px;"></i> Continuar con Facebook
+                    </button>
+                </div>
+            </form>
+            
+            <!-- Formulario de registro -->
+            <form id="registerForm" class="auth-form">
+                <input type="hidden" id="registerCsrfToken" name="csrf_token" class="csrf-token">
+                <div class="form-group">
+                    <label for="registerName" class="form-label">Nombre</label>
+                    <input type="text" id="registerName" name="name" class="form-input" required>
+                    <div id="registerNameError" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail" class="form-label">Email</label>
+                    <input type="email" id="registerEmail" name="email" class="form-input" required>
+                    <div id="registerEmailError" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword" class="form-label">Contraseña</label>
+                    <input type="password" id="registerPassword" name="password" class="form-input" required>
+                    <div id="registerPasswordError" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirmPassword" class="form-label">Confirmar Contraseña</label>
+                    <input type="password" id="registerConfirmPassword" name="confirmPassword" class="form-input" required>
+                    <div id="registerConfirmPasswordError" class="error-message"></div>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: flex; align-items: center;">
+                        <input type="checkbox" style="margin-right: 5px;" required> Acepto los <a href="#" style="color: #26c6da; margin-left: 5px;">términos y condiciones</a>
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Crear Cuenta</button>
+                
+                <div class="divider">
+                    <span>O</span>
+                </div>
+                
+                <div class="social-login">
+                    <button type="button" id="googleRegisterBtn" class="social-btn google-btn">
+                        <i class="fab fa-google" style="margin-right: 10px;"></i> Registrarse con Google
+                    </button>
+                    <button type="button" id="facebookRegisterBtn" class="social-btn facebook-btn">
+                        <i class="fab fa-facebook-f" style="margin-right: 10px;"></i> Registrarse con Facebook
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts en el orden correcto -->
+    <script src="/js/auth.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/ia-glob.js"></script>
+    <script>
+        // Inicializar tokens CSRF
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Inicializando página obras.html...');
+        
+            // Establecer tokens CSRF en los formularios
+            document.querySelectorAll('.csrf-token').forEach(input => {
+                if (typeof CSRF_TOKEN !== 'undefined') {
+                    input.value = CSRF_TOKEN;
+                }
+            });
+        
+            // Forzar actualización de navegación después de cargar
+            setTimeout(() => {
+                console.log('🔄 Actualizando navegación...');
+                if (typeof updateNavigation === 'function') {
+                    updateNavigation();
+                }
+                if (typeof updatePricingPlans === 'function') {
+                    updatePricingPlans();
+                }
+            }, 500);
+        
+            // Verificar si hay usuario logueado
+            const currentUser = localStorage.getItem('marketplace_current_user');
+            if (currentUser) {
+                console.log('👤 Usuario encontrado, actualizando interfaz...');
+                setTimeout(() => {
+                    if (typeof updateNavigation === 'function') {
+                        updateNavigation();
+                    }
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
